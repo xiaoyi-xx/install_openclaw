@@ -298,7 +298,7 @@ class ConfigGUI:
             else:
                 self.models_model_combobox['values'] = []
                 self.models_model_var.set('')
-                # 清空模型参数
+                # 清 空模型参数
                 self.clear_model_params()
         else:
             self.models_provider_var.set('')
@@ -344,7 +344,7 @@ class ConfigGUI:
         api_key = self.models_apikey_var.get()
         
         if not base_url or not api_key:
-            messagebox.showerror("错误", "请先填写baseUrl和apiKey")
+            messagebox.showerror("错误", "请先填写baseUrl&apiKey")
             return
         
         try:
