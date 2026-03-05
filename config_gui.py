@@ -129,6 +129,8 @@ class ConfigGUI:
         except Exception as e:
             self.status_var.set(f"错误: 加载配置文件失败: {e}")
     
+
+    
     def save_config(self):
         """保存配置文件"""
         if not self.config:
@@ -498,16 +500,7 @@ class ConfigGUI:
         self.agents_frame = ttk.Frame(self.agents_tab, padding="10")
         self.agents_frame.pack(fill=tk.BOTH, expand=True)
         
-        # 创建 agents 选择框架
-        self.agents_select_frame = ttk.LabelFrame(self.agents_frame, text="代理选择", padding="10")
-        self.agents_select_frame.pack(fill=tk.X, pady=5)
-        
-        # 创建 agents 下拉菜单
-        ttk.Label(self.agents_select_frame, text="选择代理:").pack(side=tk.LEFT, padx=5)
-        self.agents_var = tk.StringVar()
-        self.agents_combobox = ttk.Combobox(self.agents_select_frame, textvariable=self.agents_var, width=30)
-        self.agents_combobox.pack(side=tk.LEFT, padx=5)
-        self.agents_combobox.bind("<<ComboboxSelected>>", self.on_agent_selected)
+
         
         # 创建默认配置部分
         self.agents_default_frame = ttk.LabelFrame(self.agents_frame, text="默认配置", padding="10")
@@ -549,13 +542,11 @@ class ConfigGUI:
         if not self.config or 'agents' not in self.config:
             return
         
-        # 清空 agents 下拉菜单和列表
-        self.agents_combobox['values'] = []
+        # 清空 agents 列表
         self.agents_listbox.delete(0, tk.END)
         
-        # 添加默认配置到下拉菜单和列表
+        # 只显示默认配置
         if 'defaults' in self.config['agents']:
-            self.agents_combobox['values'] = ['defaults']
             self.agents_listbox.insert(tk.END, 'defaults')
             
             # 更新默认配置
@@ -563,35 +554,6 @@ class ConfigGUI:
             self.agents_primary_var.set(defaults['model'].get('primary', ''))
             self.agents_workspace_var.set(defaults.get('workspace', ''))
             self.agents_max_concurrent_var.set(str(defaults.get('maxConcurrent', '')))
-        
-        # 添加其他 agents 到下拉菜单和列表
-        if 'agents' in self.config['agents']:
-            for agent_name in self.config['agents']['agents']:
-                self.agents_combobox['values'] = (*self.agents_combobox['values'], agent_name)
-                self.agents_listbox.insert(tk.END, agent_name)
-        
-        # 默认选择第一个选项
-        if self.agents_combobox['values']:
-            self.agents_var.set(self.agents_combobox['values'][0])
-    
-    def on_agent_selected(self, event):
-        """处理代理选择事件"""
-        agent_name = self.agents_var.get()
-        if not agent_name or not self.config or 'agents' not in self.config:
-            return
-        
-        # 找到对应的代理配置
-        agent_config = None
-        if agent_name == 'defaults' and 'defaults' in self.config['agents']:
-            agent_config = self.config['agents']['defaults']
-        elif 'agents' in self.config['agents'] and agent_name in self.config['agents']['agents']:
-            agent_config = self.config['agents']['agents'][agent_name]
-        
-        # 更新配置显示
-        if agent_config:
-            self.agents_primary_var.set(agent_config['model'].get('primary', ''))
-            self.agents_workspace_var.set(agent_config.get('workspace', ''))
-            self.agents_max_concurrent_var.set(str(agent_config.get('maxConcurrent', '')))
     
     def on_listbox_select(self, event):
         """处理列表框选择事件"""
@@ -599,9 +561,21 @@ class ConfigGUI:
         if not selection:
             return
         
-        agent_name = self.agents_listbox.get(selection[0])
-        self.agents_var.set(agent_name)
+        # 只处理默认配置
+        if 'defaults' in self.config['agents']:
+            agent_config = self.config['agents']['defaults']
+            self.agents_primary_var.set(agent_config['model'].get('primary', ''))
+            self.agents_workspace_var.set(agent_config.get('workspace', ''))
+            self.agents_max_concurrent_var.set(str(agent_config.get('maxConcurrent', '')))
+    
+    def refresh_agent_config(self):
+        """刷新当前代理的配置"""
+        # 重新加载配置文件
+        self.load_config()
+        # 触发代理选择事件，更新配置显示
         self.on_agent_selected(None)
+        # 更新状态显示
+        self.status_var.set("配置已刷新")
     
     def get_agents_values(self):
         """获取代理配置标签页的值"""
@@ -611,36 +585,25 @@ class ConfigGUI:
         if 'agents' not in self.config:
             self.config['agents'] = {}
         
-        # 获取当前选择的代理
-        agent_name = self.agents_var.get()
+        # 只保存默认配置
+        if 'defaults' not in self.config['agents']:
+            self.config['agents']['defaults'] = {}
+        if 'model' not in self.config['agents']['defaults']:
+            self.config['agents']['defaults']['model'] = {}
         
-        # 找到对应的代理配置
-        agent_config = None
-        if agent_name == 'defaults':
-            if 'defaults' not in self.config['agents']:
-                self.config['agents']['defaults'] = {}
-            if 'model' not in self.config['agents']['defaults']:
-                self.config['agents']['defaults']['model'] = {}
-            agent_config = self.config['agents']['defaults']
-        elif agent_name:
-            if 'agents' not in self.config['agents']:
-                self.config['agents']['agents'] = {}
-            if agent_name not in self.config['agents']['agents']:
-                self.config['agents']['agents'][agent_name] = {}
-            if 'model' not in self.config['agents']['agents'][agent_name]:
-                self.config['agents']['agents'][agent_name]['model'] = {}
-            agent_config = self.config['agents']['agents'][agent_name]
+        agent_config = self.config['agents']['defaults']
         
         # 保存配置值
-        if agent_config:
-            agent_config['model']['primary'] = self.agents_primary_var.get()
-            agent_config['workspace'] = self.agents_workspace_var.get()
-            
-            try:
-                max_concurrent = int(self.agents_max_concurrent_var.get())
-                agent_config['maxConcurrent'] = max_concurrent
-            except ValueError:
-                pass
+        agent_config['model']['primary'] = self.agents_primary_var.get()
+        agent_config['workspace'] = self.agents_workspace_var.get()
+        
+        try:
+            max_concurrent = int(self.agents_max_concurrent_var.get())
+            agent_config['maxConcurrent'] = max_concurrent
+        except ValueError:
+            pass
+    
+
     
     def init_gateway_tab(self):
         """初始化网关配置标签页"""
@@ -666,6 +629,8 @@ class ConfigGUI:
         ttk.Label(self.gateway_frame, text="认证令牌:").grid(row=3, column=0, sticky=tk.W, pady=5)
         self.gateway_token_var = tk.StringVar()
         ttk.Entry(self.gateway_frame, textvariable=self.gateway_token_var, width=50).grid(row=3, column=1, sticky=tk.W, pady=5)
+    
+
     
     def update_gateway_tab(self):
         """更新网关配置标签页的内容"""
