@@ -5,30 +5,33 @@
 ```
 install/
 ├── config_gui.py        # OpenClaw 配置修改工具
-├── install_openclaw.bat  # OpenClaw 安装脚本
+├── install_openclaw.ps1  # OpenClaw 安装脚本（PowerShell）
 └── start_openclaw.bat   # OpenClaw 启动脚本
 ```
 
 ## 文件说明
 
-### 1. install_openclaw.bat
+### 1. install_openclaw.ps1
 
-这是一个批处理脚本，用于自动安装 OpenClaw 及其依赖项。
+这是一个 PowerShell 脚本，用于自动安装 OpenClaw 及其依赖项。
 
 **功能**：
+- 首先切换到用户目录
 - 检查并自动安装 Node.js（如果未安装）
 - 检查并自动安装 Git（如果未安装）
 - 安装 OpenClaw 最新版本
 - 运行 OpenClaw 新手引导并安装服务
+- 详细的错误处理，避免脚本闪退
 
 **使用方法**：
-1. 右键点击 `install_openclaw.bat` 文件
-2. 选择 "以管理员身份运行"
+1. 右键点击 `install_openclaw.ps1` 文件
+2. 选择 "以管理员身份运行"（PowerShell）
 3. 按照提示操作即可完成整个安装过程
 
 **注意事项**：
 - 安装 Git 时请确保勾选 "Git from the command line" 选项
-- 安装过程中会打开新的命令窗口执行安装和配置操作
+- 安装过程中会打开新的 PowerShell 窗口执行安装和配置操作
+- 脚本会自动设置执行策略为 RemoteSigned，确保脚本可以正常运行
 
 ### 2. start_openclaw.bat
 
@@ -70,7 +73,7 @@ install/
 
 ## 安装流程
 
-1. 运行 `install_openclaw.bat` 安装 OpenClaw 及其依赖
+1. 运行 `install_openclaw.ps1` 安装 OpenClaw 及其依赖
 2. 完成新手引导配置
 3. 运行 `start_openclaw.bat` 启动 OpenClaw 网关
 4. 使用 `config_gui.py` 根据需要修改配置
@@ -81,6 +84,7 @@ install/
 - 检查网络连接是否正常
 - 确保以管理员身份运行安装脚本
 - 检查 Node.js 和 Git 是否正确安装
+- 查看脚本输出的错误信息以了解具体问题
 
 ### 2. 启动失败
 - 检查 OpenClaw 是否正确安装
