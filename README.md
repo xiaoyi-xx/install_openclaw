@@ -25,11 +25,10 @@ install/
 
 **使用方法**：
 1. 右键点击 `install_openclaw.ps1` 文件
-2. 选择 "以管理员身份运行"（PowerShell）
+2. 选择 "以PowerShell运行"
 3. 按照提示操作即可完成整个安装过程
 
 **注意事项**：
-- 安装 Git 时请确保勾选 "Git from the command line" 选项
 - 安装过程中会打开新的 PowerShell 窗口执行安装和配置操作
 - 脚本会自动设置执行策略为 RemoteSigned，确保脚本可以正常运行
 
