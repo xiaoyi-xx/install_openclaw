@@ -25,8 +25,33 @@ if %errorlevel% neq 0 (
     echo.
     set /p "install_node=是否自动下载并安装 Node.js？ (y/n): "
     if /i "!install_node!" equ "y" (
-        echo 正在下载 Node.js...
-        bitsadmin /transfer "NodeJS" https://nodejs.org/dist/latest/node-v20.11.1-x64.msi %cd%\nodejs.msi
+        echo 正在获取最新的 Node.js 版本...
+        rem 使用 curl 获取最新版本的 Node.js MSI 链接
+        curl -s https://nodejs.org/dist/latest/ | findstr "node-v.*-x64\.msi" > node_links.txt
+        if %errorlevel% neq 0 (
+            echo 获取 Node.js 版本失败，请手动下载并安装。
+            echo 下载地址: https://nodejs.org/
+            pause
+            exit /b 0
+        )
+        rem 从链接中提取 MSI 文件名
+        for /f "tokens=2 delims=\"" %%i in (node_links.txt) do (
+            if "%%i" neq "" (
+                set "node_msi=%%i"
+                goto :download_node
+            )
+        )
+        :download_node
+        if "!node_msi!" equ "" (
+            echo 获取 Node.js 版本失败，请手动下载并安装。
+            echo 下载地址: https://nodejs.org/
+            pause
+            exit /b 0
+        )
+        del node_links.txt
+        set "node_url=https://nodejs.org/dist/latest/!node_msi!"
+        echo 正在下载 Node.js 最新版本...
+        bitsadmin /transfer "NodeJS" !node_url! %cd%\nodejs.msi
         if %errorlevel% neq 0 (
             echo 下载失败，请手动下载并安装 Node.js。
             echo 下载地址: https://nodejs.org/
@@ -65,7 +90,7 @@ if %errorlevel% neq 0 (
     set /p "install_git=是否自动下载并安装 Git？ (y/n): "
     if /i "!install_git!" equ "y" (
         echo 正在下载 Git...
-        bitsadmin /transfer "Git" https://github.com/git-for-windows/git/releases/latest/download/Git-2.44.0-64-bit.exe %cd%\git.exe
+        bitsadmin /transfer "Git" https://github.com/git-for-windows/git/releases/latest/download/Git-64-bit.exe %cd%\git.exe
         if %errorlevel% neq 0 (
             echo 下载失败，请手动下载并安装 Git。
             echo 下载地址: https://git-scm.com/download/win
