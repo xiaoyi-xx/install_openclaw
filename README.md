@@ -7,7 +7,7 @@
 ## 目录结构
 
 ```
-install/
+install_openclaw/
 ├── config_gui.py         # OpenClaw 配置修改工具（Python GUI）
 ├── install_openclaw.ps1  # OpenClaw 安装脚本（PowerShell）
 └── start_openclaw.bat   # OpenClaw 启动脚本（批处理）
