@@ -182,8 +182,7 @@ try {
         }
     } else {
         Write-Host "取消安装。"
-        Read-Host "按 Enter 键退出..."
-        exit
+        Read-Host "按回车运行新手引导..."
     }
 
     # 运行新手引导
