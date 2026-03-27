@@ -5,15 +5,15 @@ This project provides a complete set of tools for installing, starting, and conf
 ## Directory Structure
 
 ```
-install/
+install_openclaw/
 ├── start/                # Startup-related scripts
 │   ├── gateway.bat       # Gateway startup script
 │   ├── gateway_nocn.bat  # Gateway startup script (no Chinese)
 │   ├── open_browser.bat  # Browser opening script
 │   └── open_browser_nocn.bat  # Browser opening script (no Chinese)
 ├── LICENSE               # License file
-├── README.md             # English documentation
-├── README_zh.md          # Chinese documentation
+├── README.md             # Chinese documentation
+├── README_en.md          # English documentation
 ├── config_gui.py         # OpenClaw configuration modification tool (Python GUI)
 ├── install_openclaw.ps1  # OpenClaw installation script (PowerShell, Chinese)
 ├── install_openclaw_en.ps1  # OpenClaw installation script (PowerShell, English)
@@ -30,7 +30,7 @@ install/
 Run the PowerShell installation script to automatically install all dependencies:
 
 ```powershell
-# Right-click install_openclaw.ps1 and select "Run with PowerShell"
+# Right-click OpenClaw.ps1 and select "Run with PowerShell"
 ```
 
 #### English Version
@@ -38,7 +38,7 @@ Run the PowerShell installation script to automatically install all dependencies
 If you use an English system or prefer an English interface, you can use the English version of the installation script:
 
 ```powershell
-# Right-click install_openclaw_en.ps1 and select "Run with PowerShell"
+# Right-click OpenClaw_en.ps1 and select "Run with PowerShell"
 ```
 
 The installation script will automatically perform the following operations:
@@ -84,7 +84,7 @@ python config_gui.py
 
 ## File Descriptions
 
-### install\_openclaw\.ps1
+### install_openclaw\_openclaw\.ps1
 
 PowerShell automated installation script (Chinese version), responsible for deploying the complete OpenClaw environment.
 
@@ -106,7 +106,7 @@ PowerShell automated installation script (Chinese version), responsible for depl
 - Stable network connection
 - Script will automatically request administrator privileges
 
-### install\_openclaw\_en.ps1
+### install_openclaw\_openclaw\_en.ps1
 
 PowerShell automated installation script (English version), with the same functionality as the Chinese version but all prompt messages are in English.
 

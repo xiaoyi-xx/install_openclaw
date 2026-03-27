@@ -5,15 +5,15 @@
 ## 目录结构
 
 ```
-install/
+install_openclaw/
 ├── start/                # 启动相关脚本
 │   ├── gateway.bat       # 网关启动脚本
 │   ├── gateway_nocn.bat  # 网关启动脚本（无中文）
 │   ├── open_browser.bat  # 浏览器打开脚本
 │   └── open_browser_nocn.bat  # 浏览器打开脚本（无中文）
 ├── LICENSE               # 许可证文件
-├── README.md             # 英文说明文档
-├── README_zh.md          # 中文说明文档
+├── README.md             # 中文说明文档
+├── README_en.md          # 英文说明文档
 ├── config_gui.py         # OpenClaw 配置修改工具（Python GUI）
 ├── install_openclaw.ps1  # OpenClaw 安装脚本（PowerShell，中文）
 ├── install_openclaw_en.ps1  # OpenClaw 安装脚本（PowerShell，英文）
@@ -32,7 +32,7 @@ install/
 运行 PowerShell 安装脚本，自动完成所有依赖项的安装：
 
 ```powershell
-# 右键点击 install_openclaw.ps1，选择"以PowerShell运行"
+# 右键点击 OpenClaw.ps1，选择"以PowerShell运行"
 ```
 
 #### 英文版本
@@ -40,7 +40,7 @@ install/
 如果您使用英文系统或更喜欢英文界面，可以使用英文版本的安装脚本：
 
 ```powershell
-# 右键点击 install_openclaw_en.ps1，选择"以PowerShell运行"
+# 右键点击 OpenClaw_en.ps1，选择"以PowerShell运行"
 ```
 
 安装脚本会自动完成以下操作：
@@ -86,7 +86,7 @@ python config_gui.py
 
 ## 文件说明
 
-### install\_openclaw\.ps1
+### install_openclaw\_openclaw\.ps1
 
 PowerShell 自动化安装脚本（中文版本），负责部署完整的 OpenClaw 环境。
 
@@ -108,7 +108,7 @@ PowerShell 自动化安装脚本（中文版本），负责部署完整的 OpenC
 - 稳定的网络连接
 - 脚本会自动请求管理员权限
 
-### install\_openclaw\_en.ps1
+### install_openclaw\_openclaw\_en.ps1
 
 PowerShell 自动化安装脚本（英文版本），功能与中文版本相同，但所有提示信息均为英文。
 
