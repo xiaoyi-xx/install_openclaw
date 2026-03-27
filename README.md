@@ -1,261 +1,283 @@
-# OpenClaw 安装和配置工具
+# OpenClaw Installation and Configuration Tools
 
-本项目提供了一套完整的 OpenClaw 安装、启动和配置工具，支持 Windows 平台的自动化部署和图形化配置管理。
+This project provides a complete set of tools for installing, starting, and configuring OpenClaw, supporting automated deployment and graphical configuration management on Windows platforms.
 
-## 目录结构
+## Directory Structure
 
 ```
 install/
-├── start/                # 启动相关脚本
-│   ├── gateway.bat       # 网关启动脚本
-│   ├── gateway_nocn.bat  # 网关启动脚本（无中文）
-│   ├── open_browser.bat  # 浏览器打开脚本
-│   └── open_browser_nocn.bat  # 浏览器打开脚本（无中文）
-├── LICENSE               # 许可证文件
-├── README.md             # 说明文档
-├── config_gui.py         # OpenClaw 配置修改工具（Python GUI）
-├── install_openclaw.ps1  # OpenClaw 安装脚本（PowerShell）
-├── start_openclaw.bat    # OpenClaw 启动脚本（批处理）
-└── start_openclaw_nocn.bat  # OpenClaw 启动脚本（无中文）
+├── start/                # Startup-related scripts
+│   ├── gateway.bat       # Gateway startup script
+│   ├── gateway_nocn.bat  # Gateway startup script (no Chinese)
+│   ├── open_browser.bat  # Browser opening script
+│   └── open_browser_nocn.bat  # Browser opening script (no Chinese)
+├── LICENSE               # License file
+├── README.md             # English documentation
+├── README_zh.md          # Chinese documentation
+├── config_gui.py         # OpenClaw configuration modification tool (Python GUI)
+├── install_openclaw.ps1  # OpenClaw installation script (PowerShell, Chinese)
+├── install_openclaw_en.ps1  # OpenClaw installation script (PowerShell, English)
+├── start_openclaw.bat    # OpenClaw startup script (batch)
+└── start_openclaw_nocn.bat  # OpenClaw startup script (no Chinese)
 ```
 
-## 快速开始
+## Quick Start
 
-### 1. 安装 OpenClaw
+### 1. Install OpenClaw
 
-运行 PowerShell 安装脚本，自动完成所有依赖项的安装：
+#### Chinese Version (Recommended)
+Run the PowerShell installation script to automatically install all dependencies:
 
 ```powershell
-# 右键点击 install_openclaw.ps1，选择"以PowerShell运行"
+# Right-click install_openclaw.ps1 and select "Run with PowerShell"
 ```
 
-安装脚本会自动完成以下操作：
-- 切换到用户目录
-- 自动检查并获取管理员权限
-- 检测并安装 Node.js（如未安装）
-- 检测并安装 Git（如未安装）
-- 安装 OpenClaw 最新版本
-- 运行新手引导并配置服务
-- 完善的错误处理和提示
+#### English Version
+If you use an English system or prefer an English interface, you can use the English version of the installation script:
 
-### 2. 启动 OpenClaw
+```powershell
+# Right-click install_openclaw_en.ps1 and select "Run with PowerShell"
+```
 
-双击运行启动脚本：
+The installation script will automatically perform the following operations:
+- Switch to user directory
+- Automatically check and obtain administrator privileges
+- Detect and install Node.js (if not installed)
+- Detect and install Git (if not installed)
+- Install the latest version of OpenClaw
+- Run onboarding and configure services
+- Comprehensive error handling and prompts
+
+### 2. Start OpenClaw
+
+Double-click the startup script:
 
 ```bash
 start_openclaw.bat
 ```
 
-脚本会自动：
-- 检查 OpenClaw 安装状态
-- 执行登录操作
-- 启动网关（端口 18789）
-- 自动打开浏览器访问网关
-- 按任意键停止网关服务
+The script will automatically:
+- Check OpenClaw installation status
+- Perform login operation
+- Start gateway (port 18789)
+- Automatically open browser to access gateway
+- Press any key to stop gateway service
 
-**备选启动方案：**
-如果遇到启动失败或中文显示问题，可以使用无中文版本的启动脚本：
+**Alternative Startup Option:**
+If you encounter startup failure or Chinese display issues, you can use the no-Chinese version of the startup script:
 
 ```bash
 start_openclaw_nocn.bat
 ```
 
-### 3. 配置管理
+### 3. Configuration Management
 
-使用图形界面工具修改配置：
+Use the graphical interface tool to modify configuration:
 
 ```bash
 python config_gui.py
 ```
 
-## 文件说明
+## File Descriptions
 
 ### install_openclaw.ps1
 
-PowerShell 自动化安装脚本，负责部署完整的 OpenClaw 环境。
+PowerShell automated installation script (Chinese version), responsible for deploying the complete OpenClaw environment.
 
-**主要功能：**
-- 自动切换到用户目录
-- 自动检查并获取管理员权限
-- Node.js 自动检测与安装（LTS 版本 v24.14.0）
-- Git 自动检测与安装（从国内源下载）
-- OpenClaw 最新版安装
-- 新手引导自动执行
-- 服务安装与配置
-- 完善的错误处理机制
-- 中文友好的提示信息
+**Main features:**
+- Automatically switch to user directory
+- Automatically check and obtain administrator privileges
+- Node.js automatic detection and installation (LTS version v24.14.0)
+- Git automatic detection and installation (download from domestic source)
+- Latest OpenClaw version installation
+- Automatic onboarding execution
+- Service installation and configuration
+- Comprehensive error handling mechanism
+- Chinese-friendly prompt messages
 
-**使用前提：**
-- Windows 7 或更高版本
-- 稳定的网络连接
-- 脚本会自动请求管理员权限
+**Prerequisites:**
+- Windows 7 or higher
+- Stable network connection
+- Script will automatically request administrator privileges
 
-**安装流程：**
-1. 运行脚本后，会自动切换到用户目录
-2. 自动检查管理员权限，如无权限会弹出 UAC 提示
-3. 检测 Node.js 和 Git 环境
-4. 如有缺失，自动下载并安装
-5. 安装 OpenClaw 最新版本
-6. 运行新手引导配置服务
+### install_openclaw_en.ps1
+
+PowerShell automated installation script (English version), with the same functionality as the Chinese version but all prompt messages are in English.
+
+**Applicable scenarios:**
+- English Windows systems
+- Non-Chinese language environments
+- Users who prefer English interface
 
 ### start_openclaw.bat
 
-批处理启动脚本，用于快速启动 OpenClaw 网关服务。
+Batch startup script for quickly starting OpenClaw gateway service.
 
-**主要功能：**
-- 安装状态检查
-- 自动登录验证
-- 网关启动（端口 18789）
-- 浏览器自动打开
-- 便捷的停止机制
+**Main features:**
+- Installation status check
+- Automatic login verification
+- Gateway startup (port 18789)
+- Automatic browser opening
+- Convenient stop mechanism
 
-**使用说明：**
-双击运行后，等待网关启动完成，浏览器会自动打开。操作完成后按任意键停止服务。
+**Usage instructions:**
+After double-clicking to run, wait for the gateway to start completely, and the browser will open automatically. After operation is complete, press any key to stop the service.
 
 ### start_openclaw_nocn.bat
 
-无中文版本的启动脚本，适用于：
-- 英文系统或非中文环境
-- 中文显示乱码问题
-- 主启动脚本启动失败的情况
+No-Chinese version of the startup script, suitable for:
+- English systems or non-Chinese environments
+- Chinese display garbled issues
+- Main startup script failure situations
 
-**使用方法：**
+**Usage method:**
 ```bash
-# 双击运行
+# Double-click to run
 start_openclaw_nocn.bat
 ```
 
 ### config_gui.py
 
-Python 图形界面配置管理工具，提供可视化的配置修改功能。
+Python graphical interface configuration management tool, providing visual configuration modification functionality.
 
-**主要功能：**
-- 图形化配置界面
-- 多种配置类型管理
-- API 模型列表获取
-- 配置文件自动备份
-- 实时配置预览
+**Main features:**
+- Graphical configuration interface
+- Multiple configuration type management
+- API model list retrieval
+- Automatic configuration file backup
+- Real-time configuration preview
 
-**配置选项：**
+**Configuration options:**
 
-| 分类 | 包含内容 |
-|------|----------|
-| 元数据 | 版本号、最后修改时间 |
-| 模型配置 | 模型模式、提供者名称、baseUrl、apiKey、模型ID |
-| 代理配置 | 主模型、工作目录、最大并发数 |
-| 网关配置 | 端口、模式、绑定地址、认证令牌 |
+| Category | Content |
+|----------|----------|
+| Metadata | Version number, last modified time |
+| Model Configuration | Model mode, provider name, baseUrl, apiKey, model ID |
+| Proxy Configuration | Main model, working directory, maximum concurrency |
+| Gateway Configuration | Port, mode, binding address, authentication token |
 
-**依赖项：**
+**Dependencies:**
 - Python 3.x
-- tkinter（Python 内置）
+- tkinter (built-in with Python)
 
-### start/ 目录
+### start/ Directory
 
-包含启动相关的辅助脚本：
+Contains startup-related auxiliary scripts:
 
-- **gateway.bat**：专门用于启动 OpenClaw 网关服务
-- **gateway_nocn.bat**：网关启动脚本（无中文）
-- **open_browser.bat**：专门用于打开浏览器访问网关
-- **open_browser_nocn.bat**：浏览器打开脚本（无中文）
+- **gateway.bat**: Specifically used to start OpenClaw gateway service
+- **gateway_nocn.bat**: Gateway startup script (no Chinese)
+- **open_browser.bat**: Specifically used to open browser to access gateway
+- **open_browser_nocn.bat**: Browser opening script (no Chinese)
 
-## 详细安装流程
+## Detailed Installation Process
 
-### 步骤一：运行安装脚本
+### Step 1: Run Installation Script
 
-1. 找到 `install_openclaw.ps1` 文件
-2. 右键点击 → 选择"以PowerShell运行"
-3. 如弹出 UAC 提示，请点击"是"授予管理员权限
-4. 按照提示完成安装
+#### Chinese Version
+1. Find the `install_openclaw.ps1` file
+2. Right-click → select "Run with PowerShell"
+3. If UAC prompt appears, click "Yes" to grant administrator privileges
+4. Follow the prompts to complete installation
 
-### 步骤二：环境检测与安装
+#### English Version
+1. Find the `install_openclaw_en.ps1` file
+2. Right-click → select "Run with PowerShell"
+3. If UAC prompt appears, click "Yes" to grant administrator privileges
+4. Follow the prompts to complete installation
 
-脚本会自动：
-- 检测 Node.js 环境，如未安装则自动下载并安装
-- 检测 Git 环境，如未安装则从国内源自动下载并安装
-- 安装完成后会提示重启脚本以继续
+### Step 2: Environment Detection and Installation
 
-### 步骤三：OpenClaw 安装
+The script will automatically:
+- Detect Node.js environment, automatically download and install if not installed
+- Detect Git environment, automatically download and install from domestic source if not installed
+- After installation, prompt to restart the script to continue
 
-1. 环境准备完成后，脚本会提示是否安装 OpenClaw
-2. 确认后会打开新窗口执行安装
-3. 安装完成后会显示安装结果
+### Step 3: OpenClaw Installation
 
-### 步骤四：新手引导配置
+1. After environment preparation is complete, the script will prompt whether to install OpenClaw
+2. After confirmation, a new window will open to execute the installation
+3. After installation is complete, the installation result will be displayed
 
-1. 安装完成后，脚本会提示是否进入新手引导
-2. 确认后会打开新窗口执行新手引导
-3. 按照提示完成服务配置
+### Step 4: Onboarding Configuration
 
-### 步骤五：启动服务
+1. After installation is complete, the script will prompt whether to enter onboarding
+2. After confirmation, a new window will open to execute onboarding
+3. Follow the prompts to complete service configuration
+
+### Step 5: Start Service
 
 ```bash
-# 双击运行
+# Double-click to run
 start_openclaw.bat
 
-# 如果遇到启动问题，尝试使用无中文版本
+# If you encounter startup issues, try using the no-Chinese version
 # start_openclaw_nocn.bat
 ```
 
-### 步骤六：（可选）修改配置
+### Step 6: (Optional) Modify Configuration
 
-如需调整配置：
+If you need to adjust configuration:
 
 ```bash
-# 运行配置工具
+# Run configuration tool
 python config_gui.py
 ```
 
-## 常见问题
+## Common Issues
 
-### 安装失败
+### Installation Failure
 
-**可能原因：**
-- 网络连接不稳定
-- 权限不足
-- 依赖项安装失败
-- 下载源访问问题
+**Possible causes:**
+- Unstable network connection
+- Insufficient permissions
+- Dependency installation failure
+- Download source access issues
 
-**解决方案：**
-- 检查网络连接
-- 确保以管理员权限运行
-- 确认 Node.js 和 Git 已正确安装
-- 查看脚本输出的错误信息
-- 如下载失败，可手动下载并安装依赖项
+**Solutions:**
+- Check network connection
+- Ensure running with administrator privileges
+- Confirm Node.js and Git are correctly installed
+- Check script output error messages
+- If download fails, manually download and install dependencies
 
-### 启动失败
+### Startup Failure
 
-**可能原因：**
-- OpenClaw 未正确安装
-- 环境变量未配置
-- 端口被占用
-- 中文显示问题
+**Possible causes:**
+- OpenClaw not correctly installed
+- Environment variables not configured
+- Port occupied
+- Chinese display issues
 
-**解决方案：**
-- 确认 OpenClaw 已成功安装
-- 检查 PATH 环境变量
-- 检查端口 18789 占用情况
-- 尝试使用无中文版本的启动脚本：`start_openclaw_nocn.bat`
-- 重新运行安装脚本修复问题
+**Solutions:**
+- Confirm OpenClaw is successfully installed
+- Check PATH environment variable
+- Check port 18789 occupancy
+- Try using the no-Chinese version of the startup script: `start_openclaw_nocn.bat`
+- Re-run the installation script to fix issues
 
-### 配置问题
+### Configuration Issues
 
-**可能原因：**
-- 配置文件格式错误
-- API 密钥无效
-- 模型配置不正确
+**Possible causes:**
+- Configuration file format error
+- Invalid API key
+- Incorrect model configuration
 
-**解决方案：**
-- 使用 `config_gui.py` 检查配置
-- 确认 API 密钥有效
-- 验证模型参数
-- 参考 OpenClaw 官方文档
+**Solutions:**
+- Use `config_gui.py` to check configuration
+- Confirm API key is valid
+- Verify model parameters
+- Refer to OpenClaw official documentation
 
-## 技术支持
+## Technical Support
 
-如遇问题，请参考：
-- OpenClaw 官方文档
-- 社区技术支持渠道
+If you encounter issues, please refer to:
+- OpenClaw official documentation
+- Community technical support channels
 
-## 许可证
+## License
 
-本项目仅提供安装和配置工具，相关许可证请参考 OpenClaw 主项目。
+This project only provides installation and configuration tools. For related licenses, please refer to the OpenClaw main project.
+
+---
+
+**Other language version:** [中文 README](README_zh.md)
