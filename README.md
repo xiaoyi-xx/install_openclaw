@@ -2,7 +2,7 @@
 
 本项目提供了一套完整的 OpenClaw 安装、启动和配置工具，支持 Windows 平台的自动化部署和图形化配置管理。
 
-\[English]\(./docs/README-en.md)
+\[English]\(./README-en.md)
 
 ## 目录结构
 
