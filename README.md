@@ -2,8 +2,6 @@
 
 本项目提供了一套完整的 OpenClaw 安装、启动和配置工具，支持 Windows 平台的自动化部署和图形化配置管理。
 
-- \[English]\(./README\_en.md)
-
 ## 目录结构
 
 ```
@@ -22,6 +20,8 @@ install/
 ├── start_openclaw.bat    # OpenClaw 启动脚本（批处理）
 └── start_openclaw_nocn.bat  # OpenClaw 启动脚本（无中文）
 ```
+## 文档导航
+- [English](README_en.md)
 
 ## 快速开始
 
