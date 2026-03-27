@@ -1,17 +1,12 @@
 @echo off
 chcp 65001 >nul
-powershell -ExecutionPolicy Bypass -NoProfile -Command ^
-$openclaw = Get-Command openclaw -ErrorAction SilentlyContinue; ^
-if (-not $openclaw) { Write-Host \"错误：找不到 openclaw 命令，请确保它已加入 PATH 或指定完整路径。\"; Read-Host \"按 Enter 退出\"; exit }; ^
-Write-Host \"执行登录（忽略结果）...\"; ^
-& openclaw channels login; ^
-Write-Host \"启动网关...\"; ^
-$gateway = Start-Process -FilePath cmd.exe -ArgumentList '/c openclaw gateway --port 18789' -PassThru -NoNewWindow; ^
-Write-Host \"等待网关初始化...\"; ^
-Start-Sleep -Seconds 3; ^
-Start-Process \"http://127.0.0.1:18789/\"; ^
-Write-Host \"浏览器已打开，网关正在运行。按任意键停止网关并退出。\"; ^
-$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown'); ^
-Stop-Process -Id $gateway.Id -Force; ^
-Write-Host \"网关已停止。\"
-pause
+title OpenClaw 启动器
+echo 启动网关窗口...
+start "OpenClaw Gateway" cmd /k "cd /d %~dp0 && start\gateway.bat"
+timeout /t 5 /nobreak >nul
+echo 启动浏览器窗口...
+start "Open Browser" cmd /c "cd /d %~dp0 && start\open_browser.bat"
+
+echo 主脚本运行完成，本窗口可关闭。
+timeout /t 2 /nobreak >nul
+exit
